@@ -1,0 +1,93 @@
+/* ======= main styles ======= */
+
+/* background image for full webpage */
+html { 
+    background: url(../img/antipasti-delicious-dinner-5876.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ======= flexbox layout ======= */
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-div {
+    width: 390px;
+}
+
+#header-div {
+    width: 100%;
+}
+
+/* ======= recipe form ======= */
+
+#header {
+    color: white;
+    background-color: rgba(133, 142, 133, 0.85);
+    text-align: center;
+    padding: 14px 0;
+}
+
+.entry {
+    background-color: rgba(133, 142, 133, 0.85);
+    color: white;
+}
+
+#form-title {
+    color: rgb(83, 90, 83);
+    background-color: white;
+    padding: 6px;
+    border-radius: 3px;
+}
+
+.category {
+    padding-right: 37px;
+}
+
+.radio:hover {
+    background-color: #ccc;
+}
+
+.type-something {
+    border: 1px solid rgba(133, 142, 133);
+    border-radius: 3px;
+}
+
+.add-recipe {
+    color: rgba(133, 142, 133);
+    border: 1px solid rgba(133, 142, 133);
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 10px 11px;
+}
+
+.add-recipe:hover {
+    color: rgb(83, 90, 83);
+}
+
+textarea {
+    min-width: 99%;
+    height: 9em;
+}
+
+/* ======= media queries ======= */
+
+@media (min-width: 660px) {
+    #form-div {
+        width: 650px;
+    }
+
+    .category {
+        padding-right: 27px;
+    }
+}
