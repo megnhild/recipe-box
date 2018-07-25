@@ -54,7 +54,7 @@ router.post('/recipes', function(req, res, next) {
     });
 });
 
-//PUT /recipes/:recipeId edits a specific recipe with a favorite rating
+//PUT /recipes/:recipeId edits a specific recipe
 router.put('/recipes/:recipeId', function(req, res, next) {
     const {recipeId} = req.params;
     const recipe = RECIPES.find(entry => entry.id === recipeId);

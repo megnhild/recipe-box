@@ -1,4 +1,9 @@
 TO-DO:
+
+why does the list disappear on each refresh?
+how to view/edit the recipe?
+
+
 1. need to figure out how to make the star rating clickable
 2. how to update/put/add the star rating to the schema
 3. why is the first star rating changing when I click the stars below it? Do I have to change the class/id names for each list item?

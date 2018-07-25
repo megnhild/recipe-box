@@ -11,7 +11,7 @@ const router = require('./routes');
 // Load mongoose package
 const mongoose = require('mongoose');
 
-// Connect to MongoDB and create/use database as configured
+// Connect to mLab and create/use database as configured
 mongoose.connection.openUri(`mongodb://${config.db.username}:${config.db.password}@${config.db.host}/${config.db.dbName}`, { useNewUrlParser: true });
 
 //creates application object
