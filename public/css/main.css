@@ -1,6 +1,6 @@
 /* ======= main styles ======= */
 
-/* background image for full webpage */
+        /* background image for full webpage */
 html { 
     background: url(../img/antipasti-delicious-dinner-5876.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -13,7 +13,7 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ======= flexbox layout ======= */
+/* ======= flexbox layout for whole page ======= */
 
 #container {
     display: flex;
@@ -31,11 +31,11 @@ body {
 
 /* ======= recipe form ======= */
 
-#header {
+.header {
     color: white;
     background-color: rgba(133, 142, 133, 0.85);
     text-align: center;
-    padding: 14px 0;
+    padding: 14px 258px;
 }
 
 .entry {
@@ -61,17 +61,19 @@ body {
 .type-something {
     border: 1px solid rgba(133, 142, 133);
     border-radius: 3px;
+    box-shadow: 2px 2px 7px rgb(0, 0, 0, 0.4);
 }
 
-.add-recipe {
+.buttons {
     color: rgba(133, 142, 133);
     border: 1px solid rgba(133, 142, 133);
     border-radius: 5px;
     font-size: 1em;
     padding: 10px 11px;
+    box-shadow: 1px 1px 7px rgb(0, 0, 0, 0.4);
 }
 
-.add-recipe:hover {
+.buttons:hover {
     color: rgb(83, 90, 83);
 }
 
@@ -80,9 +82,80 @@ textarea {
     height: 9em;
 }
 
+/* ======= listed recipes ======= */
+
+#list-container {
+    background-color: white;
+}
+
+.list-group {
+    padding: 0 30px;
+}
+
+.list-group-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1.45px solid rgba(133, 142, 133); 
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ======= star rating ======= */
+
+
+
+/* .hide {
+    display: none;
+}
+
+.clear {
+    float: none;
+    clear: both;
+}
+
+.rating {
+    width: 90px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+}
+
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 1.1em;
+    cursor: pointer;
+    color: #000;
+}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
+} 
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > input.radio-btn:checked ~ label:before,
+.rating > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+} */
+
 /* ======= media queries ======= */
 
-@media (min-width: 660px) {
+@media (min-width: 680px) {
     #form-div {
         width: 650px;
     }
@@ -90,4 +163,14 @@ textarea {
     .category {
         padding-right: 27px;
     }
+    
+    #list-container {
+        width: 675px;
+    }
+
+    #list-title {
+        width: 675px;
+    }
+
+    
 }

@@ -9,21 +9,22 @@
 <body>
     <div id="container">
         <div id="header-div">
-            <h1 id="header">Recipe Box</h1>
+            <h1 class="header">Recipe Box</h1>
         </div>
         
         <div id="form-div">
-            <form>
+            <form id="add-recipe-form">
 
                 <fieldset class="entry">
                     
                     <!-- instructions for form: "add your recipe below:" -->
                     <legend id="form-title"><strong>Add your recipe below:</strong></legend>
+                    <input type="hidden" id="shirt-id" value="" />
                         <p>
                             <!-- label "title" -->
                                 <!-- input title of recipe -->
-                            <label for="title">
-                                Title: <input class="type-something" type="text" id="title" for="">
+                            <label for="recipe-title">
+                                Title: <input class="type-something" type="text" id="recipe-title" for="">
                             </label>
                         </p>
 
@@ -32,33 +33,33 @@
 
                         <!-- input radio buttons for categories: breakfast/brunch, appetizers, sides, mains, desserts -->
                         <p>
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Breakfast/Brunch">
                                 Breakfast/Brunch
                             </label>
                     
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Appetizers">
                                 Appetizers
                             </label>
                         
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Mains">
                                 Mains
                             </label>
                     
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Sides">
                                 Sides
                             </label>
                     
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Dessert">
                                 Dessert
                             </label>
 
-                            <label class="category" for="category">
-                                <input type="radio" class="radio" name="category" for="">
+                            <label class="category" for="recipe-category">
+                                <input type="radio" class="radio" name="category" id="recipe-category" value="Other">
                                 Other
                             </label>
                         </p>
@@ -66,24 +67,29 @@
                         <p>
                             <!-- label "ingredients" -->
                             <!-- textarea ingredients -->
-                            <legend>Ingredients:</legend>
-                            <textarea class="type-something" name="ingredients"></textarea>
+                            <label for="recipe-ingredients">Ingredients:</label>
+                            <textarea class="type-something" name="ingredients" id="recipe-ingredients"></textarea>
                         </p>
 
                         <p>
                             <!-- label instructions -->
                             <!-- textarea instructions -->
-                            <legend>Instructions:</legend>
-                            <textarea class="type-something" name="instructions"></textarea>
+                            <label for="recipe-instructions">Instructions:</label>
+                            <textarea class="type-something" name="instructions" id="recipe-instructions"></textarea>
                         </p>
 
                     <!-- submit button -->
-                    <button class="add-recipe" type="submit">Add to Recipes</button>
-
+                    <button class="buttons" type="button" onclick="submitRecipeForm()">Add to Recipes</button>
+                    <button class="buttons" type="button" onclick="cancelRecipeForm()">Cancel</button>
                 </fieldset>
             </form>
         </div>
 
+        <div id="list-title">
+            <h1 class="header">Recipes</h1>
+        </div>
+
+        <!-- container for recipes added -->
         <div id="list-container"></div>
 
     </div>
