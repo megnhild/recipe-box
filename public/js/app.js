@@ -1,38 +1,28 @@
 // jQuery template string
 
-// Get the modal
-const modal = document.getElementById('view-recipe-modal');
+// {/* <input type="checkbox" name="favorite" id="favorite${item.id}" value="Favorite!">
+//             Love it! */}
 
-// Get the button that opens the modal
-// const btn = document.getElementById("view-edit-button");
+// {/* <button type="button" id="view-edit-button" onclick="handleViewRecipeClick(this)" data-recipe-id="${item._id}">View&#47;Edit</button> */}
 
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
+// function generateForm(items) {
+//   items.map(item => {
+//       let classNames = ['something', 'something--${title}']
 
-// When the user clicks on the button, open the modal 
-// btn.onclick = function() {
-//     modal.style.display = "block";
-// }
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//     modal.style.display = "none";
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
+//       return (
+//           '<li className="${classNames.join(' ')}">{items.title}</li>';
+//       )
+//   })
 // }
 
 function listItemTemplate(data) {
   let compiled = '';
   data.forEach(item => {
+    let favoriteIdName = [`favorite-${item._id}`];
     compiled += `
       <li class="list-group-item">
         <strong>${item.title}</strong>${item.category}
-        <button type="button" id="view-edit-button" onclick="handleViewRecipeClick(this)" data-recipe-id="${item._id}">View&#47;Edit</button>
+        <label for="favorite-recipe"><input type="checkbox" class="favorite-checkbox" id="${favoriteIdName.join('')}" onclick="checkedFavorite(this)" name="favorite" value="true" data-recipe-id="${item._id}">Favorite</label>
         <button type="button" id="delete-button" onclick="handleDeleteRecipeClick(this)" data-recipe-id="${item._id}">Remove</button>
       </li>
     `;
@@ -41,21 +31,7 @@ function listItemTemplate(data) {
   return compiled;
 }
 
-function modalRecipeTemplate(data) {
-  let compiled = '';
-  data.forEach(item => {
-    compiled += `
-      <h1 class="full-recipe-items" id="full-recipe-title">${item.title}</h1>
-      <h2 class="full-recipe-items" id="full-recipe-category">${item.category}</h2>
-      <h2 class="full-recipe-items" id="full-recipe-ingred-label">Ingredients:</h2>
-      <p class="full-recipe-items" id="full-recipe-ingredients">${item.ingredients}</p>
-      <h2 class="full-recipe-items" id="full-recipe-instruct-label">Instructions:</h2>
-      <p class="full-recipe-items" id="full-recipe-instructions">${item.instructions}</p>
-      <button type="button" id="edit-button" onclick="handleEditRecipeClick(this)" data-recipe-id="${item._id}">Edit</button>
-    `;
-  });
-  return compiled;
-}
+
 
 function getRecipes() {
   return $.ajax('/api/recipes')
@@ -88,6 +64,7 @@ function submitRecipeForm() {
     category: selectedCategory,
     ingredients: $('#recipe-ingredients').val(),
     instructions: $('#recipe-instructions').val(),
+    favorite: $('#favorite-status').val(),
     _id: $('#recipe-id').val()
   };
 
@@ -117,73 +94,76 @@ function cancelRecipeForm() {
   $('#add-recipe-form')[0].reset();
 }
 
-function viewRecipe(recipeId) {
-  const url = '/api/recipes/' + recipeId;
+// $('input[name=favorite]').live("click",function(){
+//   var id    = $(this).attr('id');
 
-  return $.ajax(url)
-    .then(res => {
-      console.log("Results from viewRecipe()", res);
-      return res;
-    })
-    .fail(err => {
-      console.log("Error in viewRecipe()", err);
-      throw err;
-    });
-}
+//   if($(this).attr('checked')) {
+//       var favorite = 1;
+//   } else {
+//       var favorite = 0;
+//   }
 
-function viewRecipeModal() {
+//   $.ajax({
+//       type:'GET',
+//       url:'favorites.php',
+//       data:'id= ' + id + '&favorite='+favorite
+//   });
+//   //console.log('id: ' + id + ' Publico: '+publico + 'Value: '+value);
 
-  viewRecipe()
-    .then(recipe => {
-      recipe = window.recipeList.find(recipe => recipe._id === recipeId);
-      $("view-recipe-modal").html(modalRecipeTemplate(recipe));
-    })
+// });
 
-  const selectedCategory = $("input[name=category]:checked").attr("value");
+//  if checked
+//    change the value of favorite to true
+//    console.log('Recipe has been favorited.')
 
-  const recipeData = {
-    title: $('#recipe-title').val(),
-    category: selectedCategory,
-    ingredients: $('#recipe-ingredients').val(),
-    instructions: $('#recipe-instructions').val(),
-  };
+// const checkedValue = $(`#favorite-${recipeId}:checked`).val();
 
-  //fetch API, fetch method
-  fetch('/api/recipes', {
-    method: 'POST',
-    body: JSON.stringify(recipeData),
+function updateFavoriteStatus(recipeId) {
+  const recipe = window.recipeList.find(recipe => recipe._id === recipeId);
+  //gets the value of the checked favorite checkbox
+  let value = $(`#favorite-${recipeId}:checked`).val();
+  if(value !== undefined) {
+    value = true;
+    console.log(recipe);
+    console.log(value);
+  } else if(value === undefined) {
+    value = false;
+    console.log(recipe);
+    console.log(value);
+  }
+  
+  const url = 'api/recipes/' + recipeId;
+
+  fetch(url, {
+    method: 'PUT',
     headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+      'Content-Type': 'application/json; charset=utf-8'
     }
   })
     .then(res => res.json())
-    .then(recipe => {
-        console.log("we have posted the data", recipe);
-        refreshRecipeList();
+    .then(res => {
+      console.log("recipe's favorite status has been updated");
     })
     .catch(err => {
-        console.error(err);
-    }) 
+      console.error("recipe's favorite status was not updated", err);
+    })
+};
 
-  console.log("Your recipe data", recipeData);
-}
-
-function handleViewRecipeClick(element) {
-  modal.style.display = "block";
-  console.log("You clicked 'View&#47;Edit'.");
+function checkedFavorite (element) {
   const recipeId = element.getAttribute('data-recipe-id');
 
-  viewRecipeModal(recipeId);
+  updateFavoriteStatus(recipeId);
 }
 
-function deleteRecipe() {
+function deleteRecipe(recipeId) {
   const url = '/api/recipes/' + recipeId;
 
   fetch(url, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json; charset=utf-8'}
-    })
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+  })
     .then(res => res.json())
     .then(res => {
       console.log("recipe has been deleted");

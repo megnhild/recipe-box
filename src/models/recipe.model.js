@@ -8,6 +8,7 @@ const RecipeSchema = new mongoose.Schema({
     category: {type: String, required: true},
     ingredients: {type: String, required: true},
     instructions: {type: String, required: true},
+    favorite: {type: Boolean, default: false, required: true},
     created_at: { type: Date, default: Date.now },
     deleted: { type: Boolean }
 });

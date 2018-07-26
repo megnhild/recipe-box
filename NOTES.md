@@ -1,16 +1,9 @@
 TO-DO:
-
-why does the list disappear on each refresh?
-how to view/edit the recipe?
-
-
-1. need to figure out how to make the star rating clickable
-2. how to update/put/add the star rating to the schema
-3. why is the first star rating changing when I click the stars below it? Do I have to change the class/id names for each list item?
-4. click on recipe title to view whole recipe
-5. style "remove" buttons
-6. style recipe list
-7. final styling
+1. write function to update favorite status
+2. click on recipe title to view whole recipe
+3. style "remove" buttons
+4. style recipe list
+5. final styling
 
 
 sample entry

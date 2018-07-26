@@ -43,6 +43,7 @@ router.post('/recipes', function(req, res, next) {
         category: req.body.category,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
+        favorite: req.body.favorite
     };
 
     recipe.create(recipeData, function(err, newRecipe) {
@@ -57,16 +58,25 @@ router.post('/recipes', function(req, res, next) {
 //PUT /recipes/:recipeId edits a specific recipe
 router.put('/recipes/:recipeId', function(req, res, next) {
     const {recipeId} = req.params;
-    const recipe = RECIPES.find(entry => entry.id === recipeId);
-    if (!recipe) {
-      return res.status(404).end(`Could not find recipe '${recipeId}'`);
-    }
-  
-    // recipe.title = req.body.title;
-    // recipe.category = req.body.category;
-    // recipe.ingredients: req.body.ingredients;
-    // recipe.instructions: req.body.instructions;
-    // res.json(recipe);
+    recipe.findById(recipeId, function(err, recipe) {
+        if (err) {
+            console.error(err);
+            return res.status(500).json(err);
+        }
+        if (!recipe) {
+            return res.status(404).json({message: "recipe not found"});
+        }
+
+        recipe.favorite = req.body.favorite;
+
+        recipe.save(function(err, savedRecipe) {
+            if (err) {
+                console.error(err);
+                return res.status(500).json(err);
+            }
+            res.json(savedRecipe);
+        })
+    })
 });
 
 router.delete('/recipes/:recipeId', function(req, res, next) {
