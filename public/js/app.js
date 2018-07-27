@@ -6,9 +6,9 @@ function listItemTemplate(data) {
     let favoriteIdName = [`favorite-${item._id}`];
     compiled += `
       <li class="list-group-item">
-        <strong>${item.title}</strong>${item.category}
-        <label for="favorite-recipe"><input type="checkbox" class="favorite-checkbox" id="${favoriteIdName.join('')}" onclick="updateFavoriteStatus(this)" name="favorite" value="true" data-recipe-id="${item._id}">Favorite</label>
-        <button type="button" id="delete-button" onclick="handleDeleteRecipeClick(this)" data-recipe-id="${item._id}">Remove</button>
+        <strong>${item.title}</strong>- ${item.category} -
+        <label for="favorite-recipe" class="favorite-label"><input type="checkbox" class="favorite-checkbox" id="${favoriteIdName.join('')}" onclick="updateFavoriteStatus(this)" name="favorite" value="true" data-recipe-id="${item._id}">Favorite</label>
+        <button type="button" class="delete-button" onclick="handleDeleteRecipeClick(this)" data-recipe-id="${item._id}">Remove</button>
       </li>
     `;
   });
@@ -36,6 +36,7 @@ function refreshRecipeList() {
     })
 }
 
+// triggered when submit button is clicked in form
 function submitRecipeForm() {
   console.log("You clicked 'submit'.");
 
@@ -73,12 +74,12 @@ function submitRecipeForm() {
   $('#add-recipe-form')[0].reset();
 }
 
+// clears form when cancel button on form is clicked
 function cancelRecipeForm() {
   $('#add-recipe-form')[0].reset();
 }
 
-//ADD THIS FUNCTION BACK
-
+// triggered when the 'favorite' checkbox is clicked
 function updateFavoriteStatus(element) {
   console.log("You clicked 'favorite'.");
   const recipeId = element.getAttribute('data-recipe-id');
@@ -111,29 +112,7 @@ function updateFavoriteStatus(element) {
     })
 };
 
-
-
-
-
-
-
-// function getCheckboxValue(element) {
-//   const recipeId = element.getAttribute('data-recipe-id');
-
-//   getOneRecipe(recipeId);
-
-//   const recipe = window.recipeList.find(recipe => recipe._id === recipeId);
-//   //gets the value of the checked favorite checkbox
-//   let value = $(`#favorite-${recipeId}:checked`).val();
-//   if(value !== undefined) {
-//     value = true;
-//     console.log(value);
-//   } else {
-//     value = false;
-//     console.log(value);
-//   }
-// }
-
+// 'soft' deletes specific recipe
 function deleteRecipe(recipeId) {
   const url = '/api/recipes/' + recipeId;
 
@@ -153,6 +132,7 @@ function deleteRecipe(recipeId) {
     });
 }
 
+// triggers 'soft' delete
 function handleDeleteRecipeClick(element) {
   const recipeId = element.getAttribute('data-recipe-id');
 

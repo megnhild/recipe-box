@@ -105,6 +105,17 @@ a {
     text-decoration: none;
 }
 
+.favorite-label {
+    color: purple;
+}
+
+.delete-button {
+    background-color: rgba(133, 142, 133);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 6px;
+}
+
 /* ======= media queries ======= */
 
 @media (min-width: 680px) {
@@ -122,7 +133,5 @@ a {
 
     #list-title {
         width: 675px;
-    }
-
-    
+    } 
 }
