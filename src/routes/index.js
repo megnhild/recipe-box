@@ -58,25 +58,36 @@ router.post('/recipes', function(req, res, next) {
 //PUT /recipes/:recipeId edits a specific recipe
 router.put('/recipes/:recipeId', function(req, res, next) {
     const {recipeId} = req.params;
-    recipe.findById(recipeId, function(err, recipe) {
-        if (err) {
-            console.error(err);
-            return res.status(500).json(err);
-        }
-        if (!recipe) {
-            return res.status(404).json({message: "recipe not found"});
-        }
 
-        recipe.favorite = req.body.favorite;
+    recipe.findByIdAndUpdate(recipeId, { favorite: req.body.favorite }, {new: true})
+	.then(recipe => {
+		if (!recipe) {
+			return res.status(404).send({
+				message: "recipe not found with id" + recipeId
+			})
+		}
+		res.json(recipe)
+	})
 
-        recipe.save(function(err, savedRecipe) {
-            if (err) {
-                console.error(err);
-                return res.status(500).json(err);
-            }
-            res.json(savedRecipe);
-        })
-    })
+    // Recipe.findById(recipeId, function(err, recipe) {
+    //     if (err) {
+    //         console.error(err);
+    //         return res.status(500).json(err);
+    //     }
+    //     if (!recipe) {
+    //         return res.status(404).json({message: "recipe not found"});
+    //     }
+
+    //     recipe.favorite = req.body.favorite;
+
+        // recipe.save(function(err, savedRecipe) {
+        //     if (err) {
+        //         console.error(err);
+        //         return res.status(500).json(err);
+        //     }
+        //     res.json(savedRecipe);
+        // })
+    // })
 });
 
 router.delete('/recipes/:recipeId', function(req, res, next) {
