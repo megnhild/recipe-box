@@ -1,6 +1,6 @@
 FSJS Project: Recipe Box
 
-This is an application that collects recipes because I'm tired of having to sif through my pins for my favorite recipes on Pinterest. It is designed to let users build their own digital recipe box. They can fill out the form to create/add recipes to their "box", mark specific recipes as a favorite, and delete recipes from the list. This is a CRUD application using the MEAN stack. Even though my project meets all four CRUD application requirements, I will be adding the feature to see the full recipe later.
+This is an application that collects recipes because I'm tired of having to sift through my pins for my favorite recipes on Pinterest. It is designed to let users build their own digital recipe box. They can fill out the form to create/add recipes to their "box", mark specific recipes as a favorite, and delete recipes from the list. This is a CRUD application using the MEAN stack. Even though my project meets all four CRUD application requirements, I will be adding the feature to see the full recipe later.
 
 Starting Recipe Box
 
