@@ -12,7 +12,7 @@ After cloning the repository...
 3. run 'npm start' to start up the app's server
 4. open a web browser and go to http://localhost:3000/
 
-If you do not have a recipe in mind that you would like to add, below is a sample recipe you can use to test out the application. Enjoy!
+There are already a few recipes listed for you. Add a recipe to test the app! If you do not have a recipe in mind that you would like to add, below is a sample recipe you can use to test out the application. Enjoy!
 
 Sample Entry
 
